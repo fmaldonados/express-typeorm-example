@@ -17,11 +17,13 @@ export function ensureAuth (req:Request, res:Response, next:NextFunction){
         var payload = decode(token,config.secret);
         
         if(payload.exp <= moment().unix){
-            return res.status(401).send({message: 'TOKEN HA EXPIRADO'});   
+            return res.status(401).send({message: 'TOKEN HAS EXPIRED'});   
         }
+
     }catch(ex){
         console.log(ex);
-        return res.status(404).send({message: 'TOKEN NO VALIDO'});
+        return res.status(404).send({message: 'NO VALID TOKEN'});
     }
+
     next();
 };

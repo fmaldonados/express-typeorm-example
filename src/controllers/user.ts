@@ -89,7 +89,9 @@ export async function login(request: Request, response: Response) {
 
     if(request.body.password == user.password){
         let token = createToken(user);
-        response.send({token:token});
+        response.send({
+            role:user.role,
+            token:token});
     }else{
         response.status(404);
         response.end();

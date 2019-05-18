@@ -46,6 +46,10 @@ export async function put(request: Request, response: Response) {
         return;
     }
 
+    if (request.body.password) {
+        request.body.password = SHA256(request.body.password, config.secret).toString();
+    }
+
     user.firstName = request.body.firstName || user.firstName;
     user.lastName = request.body.lastName || user.lastName;
     user.username = request.body.username || user.username;

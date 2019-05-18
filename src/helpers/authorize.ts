@@ -19,7 +19,7 @@ export function ensureAuth (req:Request, res:Response, next:NextFunction){
         if(payload.exp <= moment().unix){
             return res.status(401).send({message: 'TOKEN HAS EXPIRED'});   
         }
-
+        req.body.userRole = payload.role
     }catch(ex){
         console.log(ex);
         return res.status(404).send({message: 'NO VALID TOKEN'});

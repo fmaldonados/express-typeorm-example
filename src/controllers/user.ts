@@ -7,9 +7,7 @@ import { createToken } from "../helpers/jwt";
 
 export async function post(request: Request, response: Response) {
     const userRepository = getManager().getRepository(User);
-
     request.body.password = SHA256(request.body.password, config.secret).toString(); 
-    
     const newUser = userRepository.create(request.body);
 
     await userRepository.save(newUser);
